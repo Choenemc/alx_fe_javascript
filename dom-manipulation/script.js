@@ -10,6 +10,19 @@ let quotes = [
     { text: "The future belongs to those who believe in the beauty of their dreams.", category: "dreams" }
 ];
 
+// Load quotes from localStorage if available
+function loadQuotesFromStorage() {
+    const storedQuotes = localStorage.getItem('savedQuotes');
+    if (storedQuotes) {
+        quotes = JSON.parse(storedQuotes);
+    }
+}
+
+// Save quotes to localStorage
+function saveQuotesToStorage() {
+    localStorage.setItem('savedQuotes', JSON.stringify(quotes));
+}
+
 // DOM elements
 const quoteDisplay = document.getElementById('quoteDisplay');
 const newQuoteBtn = document.getElementById('newQuote');
@@ -18,6 +31,9 @@ let currentCategory = 'all';
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
+    // Load saved quotes from localStorage
+    loadQuotesFromStorage();
+    
     // Display first random quote
     showRandomQuote();
     
@@ -68,6 +84,9 @@ function addQuote() {
     if (text && category) {
         // Add new quote
         quotes.push({ text, category });
+        
+        // Save to localStorage
+        saveQuotesToStorage();
         
         // Clear inputs
         textInput.value = '';
