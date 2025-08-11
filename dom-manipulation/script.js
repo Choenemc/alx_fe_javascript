@@ -9,7 +9,6 @@ let quotes = [
     { text: "If life were predictable it would cease to be life, and be without flavor.", category: "life" },
     { text: "The future belongs to those who believe in the beauty of their dreams.", category: "dreams" }
 ];
-
 // Load quotes from localStorage if available
 function loadQuotesFromStorage() {
     const storedQuotes = localStorage.getItem('savedQuotes');
@@ -31,29 +30,19 @@ let currentCategory = 'all';
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', function() {
-    // Load saved quotes from localStorage
     loadQuotesFromStorage();
-    
-    // Display first random quote
     showRandomQuote();
-    
-    // Set up event listeners
     newQuoteBtn.addEventListener('click', showRandomQuote);
-    
-    // Generate category buttons
     updateCategoryButtons();
+    createAddQuoteForm(); // Create the form dynamically
 });
 
 // Show a random quote
 function showRandomQuote() {
-    let filteredQuotes = quotes;
-    
-    // Filter by category if not 'all'
-    if (currentCategory !== 'all') {
-        filteredQuotes = quotes.filter(quote => quote.category === currentCategory);
-    }
-    
-    // Check if there are quotes available
+    let filteredQuotes = currentCategory === 'all' 
+        ? quotes 
+        : quotes.filter(quote => quote.category === currentCategory);
+
     if (filteredQuotes.length === 0) {
         quoteDisplay.innerHTML = `
             <p class="quote-text">No quotes found in this category.</p>
@@ -61,16 +50,28 @@ function showRandomQuote() {
         `;
         return;
     }
-    
-    // Get random quote
-    const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
-    const randomQuote = filteredQuotes[randomIndex];
-    
-    // Display the quote
+
+    const randomQuote = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
     quoteDisplay.innerHTML = `
         <p class="quote-text">"${randomQuote.text}"</p>
         <p class="quote-category">Category: ${randomQuote.category}</p>
     `;
+}
+
+// Create the add quote form dynamically
+function createAddQuoteForm() {
+    const formContainer = document.createElement('div');
+    formContainer.id = 'addQuoteContainer';
+    formContainer.innerHTML = `
+        <h3>Add New Quote</h3>
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteBtn">Add Quote</button>
+    `;
+    document.body.appendChild(formContainer);
+
+    // Add event listener to the dynamically created button
+    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
 }
 
 // Add a new quote to the database
@@ -82,20 +83,12 @@ function addQuote() {
     const category = categoryInput.value.trim().toLowerCase();
     
     if (text && category) {
-        // Add new quote
         quotes.push({ text, category });
-        
-        // Save to localStorage
         saveQuotesToStorage();
-        
-        // Clear inputs
         textInput.value = '';
         categoryInput.value = '';
-        
-        // Update UI
         showRandomQuote();
         updateCategoryButtons();
-        
         alert('Quote added successfully!');
     } else {
         alert('Please enter both quote text and category.');
@@ -104,20 +97,14 @@ function addQuote() {
 
 // Update category buttons
 function updateCategoryButtons() {
-    // Get all unique categories
     const categories = ['all', ...new Set(quotes.map(quote => quote.category))];
-    
-    // Clear existing buttons
     categoryButtons.innerHTML = '';
     
-    // Create new buttons
     categories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('category-btn');
-        if (category === currentCategory) {
-            button.classList.add('active-category');
-        }
+        if (category === currentCategory) button.classList.add('active-category');
         
         button.addEventListener('click', () => {
             currentCategory = category;
