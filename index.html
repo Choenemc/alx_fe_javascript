@@ -1,1 +1,52 @@
-console.log('Hello JavaScript');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Quote Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    #quoteDisplay {
+      padding: 20px;
+      margin: 20px 0;
+      background: #f0f0f0;
+      border-radius: 8px;
+      font-size: 1.2em;
+      min-height: 60px;
+    }
+    .category {
+      font-style: italic;
+      color: #666;
+      margin-top: 5px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+    }
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dynamic Quote Generator</h1>
+
+  <!-- Quote Display -->
+  <div id="quoteDisplay"></div>
+  <button id="newQuote">Show New Quote</button>
+
+  <!-- Add New Quote Form -->
+  <div>
+    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+    <button id="addQuoteBtn">Add Quote</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
