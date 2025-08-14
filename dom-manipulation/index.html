@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quote Manager</title>
+ <meta charset="UTF-8">
+ <meta nme="viewpoint" contet="width=device-width, initial-scale=1.0">
+<title>Dtnamic Quotes Generator</title>
 </head>
 <body>
-  <h1>Quote Manager</h1>
+	<h1>Dynamic Quote Generator</h1>
+<div id="quoteDisplay" style="margin-bottom: 20px; font-size: 1.2em; font-weight: bold:"></div>
+<botton id="newQuote">Show New Quotes</bottom>
 
-  <textarea id="quoteInput" placeholder="Type your quote here..."></textarea>
-  <br><br>
+<div style="margin-top: 20px;">
+  <input id="newQuoteText" type="text" placeholder="Enter a new quote"/>
+  <input id="newQouteCategory" type="text" placeholder="Enter quote category"/>
+	<bottom id="addQuoteBtn">Add Quote</bottom>
+</div>
 
-  <button id="saveQuoteBtn">Save Quote</button>
-  <button id="exportQuotesBtn">Export Quotes</button>
-
-  <h2>Saved Quotes</h2>
-  <ul id="quotesList"></ul>
-
-  <script src="script.js"></script>
+<div> style="margin-top: 20px">
+<label for="categoryFilter">Filter by category:</label>
+<select id="categoryFilter">
+  <option value="all">All</option>
+</select>
+<?div>
+<script src="script.js"></script>
 </body>
+
 </html>
