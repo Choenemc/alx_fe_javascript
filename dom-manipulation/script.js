@@ -1,3 +1,7 @@
+// DOM Elements
+const quoteDisplay = document.getElementById("quoteDisplay");
+const newQuoteBtn = document.getElementById("newQuote");
+
 // Initial quotes array
 let quotes = [
   { text: "The only way to do great work is to love what you do.", category: "Inspiration" },
