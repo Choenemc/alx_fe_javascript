@@ -119,6 +119,36 @@ function exportQuotes() {
     alert("Failed to export quotes. Please try again.");
   }
 }
+function importQuotes(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    try {
+      const importedQuotes = JSON.parse(e.target.result);
+      if (Array.isArray(importedQuotes)) {
+        quotes = importedQuotes;
+        saveQuotesToStorage();
+        updateCategoryOptions();
+        showRandomQuote();
+        alert(`Successfully imported ${importedQuotes.length} quotes!`);
+      } else {
+        throw new Error("File doesn't contain a valid array of quotes");
+      }
+    } catch (error) {
+      console.error("Error importing quotes:", error);
+      alert("Error importing quotes. Please check the file format.");
+    }
+  };
+
+  reader.onerror = function() {
+    alert("Error reading file. Please try again.");
+  };
+
+  reader.readAsText(file);
+}
 
 // Initialize the application
 function init() {
@@ -136,11 +166,28 @@ function init() {
     exportBtn.addEventListener("click", exportQuotes);
   }
   
-  // Optional: Uncomment if you want the dynamic form
-  // createAddQuoteForm();
-}
+  // Add Import Quotes file input if it exists in DOM
+  const importInput = document.getElementById("importQuotes");
+  if (importInput) {
+    importInput.addEventListener("change", importQuotes);
+  }
+  
+function init() {
+  updateCategoryOptions();
+  showRandomQuote();
+  
+  // Event Listeners
+  newQuoteBtn.addEventListener("click", showRandomQuote);
+  addQuoteBtn.addEventListener("click", addQuote);
+  categoryFilter.addEventListener("change", showRandomQuote);
+  
+  // Add Export Quotes button if it exists in DOM
+  const exportBtn = document.getElementById("exportQuotes");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", exportQuotes);
+  }
+  
 
-// [Rest of the code remains the same...]
 
 // Initialize the application
 function init() {
@@ -152,9 +199,7 @@ function init() {
   addQuoteBtn.addEventListener("click", addQuote);
   categoryFilter.addEventListener("change", showRandomQuote);
   
-  // Optional: Uncomment if you want the dynamic form
-  // createAddQuoteForm();
 }
 
 // Run initialization when DOM is loaded
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", init); {
