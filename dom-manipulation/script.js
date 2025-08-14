@@ -91,6 +91,57 @@ function createAddQuoteForm() {
   document.body.appendChild(formContainer);
 }
 
+
+function exportQuotes() {
+  try {
+    
+    const quotesJSON = JSON.stringify(quotes, null, 2);
+    
+    const blob = new Blob([quotesJSON], { type: "application/json" });
+    
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "quotes.json";
+    
+    // Trigger download
+    document.body.appendChild(a);
+    a.click();
+    
+    // Clean up
+    setTimeout(() => {
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }, 100);
+    
+  } catch (error) {
+    console.error("Error exporting quotes:", error);
+    alert("Failed to export quotes. Please try again.");
+  }
+}
+
+// Initialize the application
+function init() {
+  updateCategoryOptions();
+  showRandomQuote();
+  
+  // Event Listeners
+  newQuoteBtn.addEventListener("click", showRandomQuote);
+  addQuoteBtn.addEventListener("click", addQuote);
+  categoryFilter.addEventListener("change", showRandomQuote);
+  
+  // Add Export Quotes button if it exists in DOM
+  const exportBtn = document.getElementById("exportQuotes");
+  if (exportBtn) {
+    exportBtn.addEventListener("click", exportQuotes);
+  }
+  
+  // Optional: Uncomment if you want the dynamic form
+  // createAddQuoteForm();
+}
+
+// [Rest of the code remains the same...]
+
 // Initialize the application
 function init() {
   updateCategoryOptions();
