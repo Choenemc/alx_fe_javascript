@@ -10,8 +10,8 @@ let quotes = [
 ];
 
 
-const quoteDisplay = document.getElementById("quoteDisplay");
-const newQuoteBtn = document.getElementById("newQuote");
+const QuoteDisplay = document.getElementById("quoteDisplay");
+const NewQuoteBtn = document.getElementById("newQuote");
 const addQuoteBtn = document.getElementById("addQuoteBtn");
 const newQuoteText = document.getElementById("newQuoteText");
 const newQuoteCategory = document.getElementById("newQuoteCategory");
