@@ -30,6 +30,17 @@ function showRandomQuote() {
     return;
   }
 
+
+
+      function createAddQuoteForm() {
+  // Example: Create a form dynamically
+  const form = document.createElement('form');
+  form.innerHTML = `
+    <input type="text" placeholder="Quote" id="quote-input">
+    <button type="submit">Add Quote</button>
+  `;
+  document.body.appendChild(form);
+}
   const randomIndex = Math.floor(Math.random() * filteredQuotes.length);
   const quote = filteredQuotes[randomIndex];
   quoteDisplay.textContent = `"${quote.text}" — ${quote.category}`;
@@ -65,3 +76,8 @@ categoryFilter.addEventListener("change", showRandomQuote);
 updateCategoryOptions();
 showRandomQuote();
 
+// Event Listeners
+newQuoteBtn.addEventListener("click", showRandomQuote);
+
+// Initialize form on page load
+createAddQuoteForm();
