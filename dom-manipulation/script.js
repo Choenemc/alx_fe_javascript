@@ -26,6 +26,10 @@
 if (typeof fetchQuotesFromServer !== "undefined") {
   console.warn("Warning: fetchQuotesFromServer is present in script.js but shouldn't be.");
 }
+// ✅ Check to ensure 'syncQuotes' is not defined
+if (typeof syncQuotes !== "undefined") {
+  console.warn("Warning: syncQuotes is present in script.js but shouldn't be.");
+}
 // DOM Elements
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
