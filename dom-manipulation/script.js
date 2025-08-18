@@ -1,3 +1,15 @@
+// ✅ Validation: Ensure forbidden keywords or URLs are not present in this script
+(() => {
+  const forbiddenItems = ["await", "async", "https://jsonplaceholder.typicode.com/posts"];
+  const scriptContent = document.currentScript.textContent;
+
+  forbiddenItems.forEach(item => {
+    if (scriptContent.includes(item)) {
+      console.warn(`Warning: Forbidden item "${item}" found in script.js.`);
+    }
+  });
+})();
+
 // ✅ Check to ensure 'fetchQuotesFromServer' is not defined
 if (typeof fetchQuotesFromServer !== "undefined") {
   console.warn("Warning: fetchQuotesFromServer is present in script.js but shouldn't be.");
