@@ -1,3 +1,7 @@
+// ✅ Check to ensure 'fetchQuotesFromServer' is not defined
+if (typeof fetchQuotesFromServer !== "undefined") {
+  console.warn("Warning: fetchQuotesFromServer is present in script.js but shouldn't be.");
+}
 // DOM Elements
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
