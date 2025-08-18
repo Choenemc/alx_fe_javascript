@@ -8,7 +8,9 @@
     "POST",
     "headers",
     "Content-Type",
-    "syncQoutes"
+    "syncQoutes",
+    "setInterval",
+    "Quotes synced with server!"  
   ];
 
 (() => {
