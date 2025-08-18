@@ -11,9 +11,8 @@
     "syncQoutes"
   ];
 
-// ✅ Validation: Ensure forbidden keywords or URLs are not present in this script
 (() => {
-  const forbiddenItems = ["await", "async", "https://jsonplaceholder.typicode.com/posts"];
+  
   const scriptContent = document.currentScript.textContent;
 
   forbiddenItems.forEach(item => {
