@@ -30,6 +30,10 @@ if (typeof fetchQuotesFromServer !== "undefined") {
 if (typeof syncQuotes !== "undefined") {
   console.warn("Warning: syncQuotes is present in script.js but shouldn't be.");
 }
+// ✅ Check to ensure 'setInterval' is not used
+if (typeof setInterval !== "undefined" && setInterval.toString().includes("[native code]")) {
+  console.warn("Warning: setInterval is being used in script.js but shouldn't be.");
+}
 // DOM Elements
 const quoteDisplay = document.getElementById("quoteDisplay");
 const newQuoteBtn = document.getElementById("newQuote");
